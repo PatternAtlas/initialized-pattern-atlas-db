@@ -1,0 +1,1 @@
+"# initialized-pattern-atlas-db" 
