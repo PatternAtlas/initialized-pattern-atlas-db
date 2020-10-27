@@ -2,8 +2,9 @@ FROM postgres:12
 
 LABEL MAINTAINER Manuela Weigold <manuela.weigold@iaas.uni-stuttgart.de>
 
-ENV PATTERN_ATLAS_CONTENT_REPOSITORY_URL "https://github.com/PatternPedia/pattern-atlas-content.git"
-ENV PATTERN_ATLAS_PRIVATE_CONTENT_REPOSITORY_URL "git@github.com:PatternPedia/internal-pattern-atlas-content.git"
+ENV PATTERN_ATLAS_CONTENT_REPOSITORY_URL "https://github.com/PatternAtlas/pattern-atlas-content.git"
+ENV PATTERN_ATLAS_PRIVATE_CONTENT_REPOSITORY_URL "git@github.com:PatternAtlas/internal-pattern-atlas-content.git"
+ENV PATTERN_ATLAS_CONTENT_REPOSITORY_BRANCH "update-qc-patterns"
 ENV SUBFOLDER_CONTENT_REPO_BACKUP_FILES "db-backup-files"
 ENV COPY_CONTENT_REPOSITORY_TARGET_PATH "/var/pattern-atlas/testdata"
 ENV POSTGRES_PASSWORD postgres
