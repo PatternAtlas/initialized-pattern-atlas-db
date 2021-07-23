@@ -19,7 +19,11 @@ RUN  apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
+EXPOSE 5060
+
 COPY clone-data-repo.sh clone-data-repo.sh
 
 # if ssh key is set, clone data repo with the sql scripts for initalization and start postgres afterwards
-CMD  chmod 700 clone-data-repo.sh && ./clone-data-repo.sh && su postgres -c "/usr/local/bin/docker-entrypoint.sh postgres"
+CMD chmod 700 clone-data-repo.sh \
+    && ./clone-data-repo.sh \
+    && su postgres -c "/usr/local/bin/docker-entrypoint.sh postgres -p ${JDBC_DATABASE_PORT}"
