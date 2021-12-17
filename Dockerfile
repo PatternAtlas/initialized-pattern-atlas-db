@@ -11,6 +11,7 @@ ENV POSTGRES_PASSWORD postgres
 ENV POSTGRES_USER postgres
 ENV JDBC_DATABASE_PORT 5060
 ENV POSTGRES_DB db
+ENV READ_ONLY false
 
 # install dependencies (git)
 RUN  apt-get update \
@@ -22,8 +23,12 @@ RUN  apt-get update \
 EXPOSE 5060
 
 COPY clone-data-repo.sh clone-data-repo.sh
+COPY create-read-only-user.sh create-read-only-user.sh
+
 
 # if ssh key is set, clone data repo with the sql scripts for initalization and start postgres afterwards
 CMD chmod 700 clone-data-repo.sh \
     && ./clone-data-repo.sh \
+    && chmod 700 create-read-only-user.sh \
+    && ./create-read-only-user.sh \
     && su postgres -c "/usr/local/bin/docker-entrypoint.sh postgres -p ${JDBC_DATABASE_PORT}"
